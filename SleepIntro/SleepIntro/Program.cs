@@ -12,7 +12,7 @@ namespace SleepIntro
             }
             else
             {
-                Console.WriteLine("You need more rest.");
+                Console.WriteLine("Get to sleep.");
             }
         }
     }
