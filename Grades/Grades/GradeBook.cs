@@ -17,6 +17,25 @@ namespace Grades
             grades = new List<float>(); //List that can hold 0 or more numbers
         }
 
+        //Contain all computations within the public function.
+        public GradeStatistics ComputeStatistics()
+        {
+            GradeStatistics stats = new GradeStatistics();
+
+            float sum = 0;
+
+            foreach(float grade in grades) //specify the variable to hold the value from the list "grades" as the list is looped through.
+            {
+                stats.HighestGrade = Math.Max(grade, stats.HighestGrade); //Math.Max will return the highest value given two inputs.
+                stats.LowestGrade = Math.Min(grade, stats.LowestGrade); //Math.Min will return the lowest value given two inputs.
+                sum += grade; //+= will add the value on the right to the value on the left and store in the variable on the left.
+            }
+
+            stats.AverageGrade = sum / grades.Count;
+
+            return stats;
+        }
+
         //This can actually be written as public void AddGrade(float grade) => grades.Add(grade);
         public void AddGrade(float grade)
         {

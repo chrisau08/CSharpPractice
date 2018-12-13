@@ -17,6 +17,11 @@ namespace Grades
             GradeBook book3 = book; //This creates the book3 variable which will have the memory location of book assigned to it.
             //Now any additions to book3 also impact book because they are referencing the same object at the specified memory location (Very Important).
             book3.AddGrade(15);
+
+            GradeStatistics stats = book.ComputeStatistics();
+            Console.WriteLine("Avg Grade: " + stats.AverageGrade); //Produces value of 65.16666
+            Console.WriteLine("Max Grade: " + stats.HighestGrade); //Produces value of 91
+            Console.WriteLine("Min Grade: " + stats.LowestGrade); //Produces value of 15
         }
     }
 }
