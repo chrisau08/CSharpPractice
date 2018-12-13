@@ -18,10 +18,10 @@ namespace Grades
             //Now any additions to book3 also impact book because they are referencing the same object at the specified memory location (Very Important).
             book3.AddGrade(15);
 
-            GradeStatistics stats = book.ComputeStatistics();
-            Console.WriteLine("Avg Grade: " + stats.AverageGrade); //Produces value of 65.16666
-            Console.WriteLine("Max Grade: " + stats.HighestGrade); //Produces value of 91
-            Console.WriteLine("Min Grade: " + stats.LowestGrade); //Produces value of 15
+            GradeStatistics stats = book.ComputeStatistics(); //Runs ComputerStatistics and places the values at the memory locations for the fields in the object stats.
+            Console.WriteLine("Avg Grade: " + stats.AverageGrade); //Displays value of 65.16666
+            Console.WriteLine("Max Grade: " + stats.HighestGrade); //Displays value of 91
+            Console.WriteLine("Min Grade: " + stats.LowestGrade); //Displays value of 15
         }
     }
 }

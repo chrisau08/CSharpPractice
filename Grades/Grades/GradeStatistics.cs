@@ -13,7 +13,7 @@ namespace Grades
             LowestGrade = float.MaxValue;
         }
 
-        //Set variables as public to make them available to be called.
+        //Set fields as public to make them available to be called.
         public float AverageGrade;
         public float HighestGrade;
         public float LowestGrade;
