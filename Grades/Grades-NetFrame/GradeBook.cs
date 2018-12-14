@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace Grades_Core
+namespace Grades_NetFrame
 {
     //Class GradeBook is being used as a blueprint for creating objects (or types). Consider this like an object in PL-SQL.
     class GradeBook
@@ -24,7 +26,7 @@ namespace Grades_Core
 
             float sum = 0;
 
-            foreach(float grade in grades) //specify the variable to hold the value from the list "grades" as the list is looped through.
+            foreach (float grade in grades) //specify the variable to hold the value from the list "grades" as the list is looped through.
             {
                 stats.HighestGrade = Math.Max(grade, stats.HighestGrade); //Math.Max will return the highest value given two inputs.
                 stats.LowestGrade = Math.Min(grade, stats.LowestGrade); //Math.Min will return the lowest value given two inputs.

@@ -1,11 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Speech.Synthesis;
 
-namespace Grades_Core
+namespace Grades_NetFrame
 {
     class Program
     {
         static void Main(string[] args)
         {
+            SpeechSynthesizer synth = new SpeechSynthesizer();
+
             GradeBook book = new GradeBook(); //Variable that can be used to access the class GradeBook (variable of type GradeBook.
             book.AddGrade(91);
             book.AddGrade(89.5f); //f tells the compiler that the value is a float and not double.
