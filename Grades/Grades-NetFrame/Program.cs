@@ -12,6 +12,7 @@ namespace Grades_NetFrame
         static void Main(string[] args)
         {
             SpeechSynthesizer synth = new SpeechSynthesizer();
+            synth.Speak("Hello! This is the grade book program");
 
             GradeBook book = new GradeBook(); //Variable that can be used to access the class GradeBook (variable of type GradeBook.
             book.AddGrade(91);
