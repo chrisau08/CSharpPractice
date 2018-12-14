@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 namespace Grades_NetFrame
 {
     //Class GradeBook is being used as a blueprint for creating objects (or types). Consider this like an object in PL-SQL.
-    class GradeBook
+    //Additionally, a class is default to the internal keyword which means only available within the same assembly (project) unless explicitly marked as public.
+    public class GradeBook
     {
         //static makes the object or function available without the code having to create a new instance of it.
         public static float MinimumGrade = 0; //So this can be called in something like console.writeline as GradeBook.MinimumGrade without needing "new MinimumGrade"
@@ -45,6 +46,6 @@ namespace Grades_NetFrame
         }
 
         //If you don't specify the access modifier (public, private, etc) then it is a private member (as opposed to public).
-        List<float> grades;
+        public List<float> grades;
     }
 }

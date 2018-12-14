@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Grades_NetFrame
 {
-    class GradeStatistics
+    public class GradeStatistics
     {
         //Instantiate the variables in the constructor so that no extra code is necessary in other code.
         public GradeStatistics()

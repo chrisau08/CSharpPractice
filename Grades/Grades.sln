@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28010.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grades-NetFrame", "Grades-NetFrame\Grades-NetFrame.csproj", "{C0C95767-7641-4E6D-9712-A08214E470C7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grades.Tests", "Grades.Tests\Grades.Tests.csproj", "{9F99A10D-4292-444A-945B-1FB2979F573A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{C0C95767-7641-4E6D-9712-A08214E470C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0C95767-7641-4E6D-9712-A08214E470C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0C95767-7641-4E6D-9712-A08214E470C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F99A10D-4292-444A-945B-1FB2979F573A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F99A10D-4292-444A-945B-1FB2979F573A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F99A10D-4292-444A-945B-1FB2979F573A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F99A10D-4292-444A-945B-1FB2979F573A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
