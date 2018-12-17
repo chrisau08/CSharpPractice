@@ -45,6 +45,8 @@ namespace Grades_NetFrame
             grades.Add(grade);
         }
 
+        public string Name;
+
         //If you don't specify the access modifier (public, private, etc) then it is a private member (as opposed to public).
         public List<float> grades;
     }

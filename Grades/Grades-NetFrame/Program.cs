@@ -11,6 +11,7 @@ namespace Grades_NetFrame
     {
         static void Main(string[] args)
         {
+            
             SpeechSynthesizer synth = new SpeechSynthesizer();
             synth.Speak("Hello! This is the grade book program");
 
@@ -30,6 +31,7 @@ namespace Grades_NetFrame
             Console.WriteLine("Avg Grade: " + stats.AverageGrade); //Displays value of 65.16666
             Console.WriteLine("Max Grade: " + stats.HighestGrade); //Displays value of 91
             Console.WriteLine("Min Grade: " + stats.LowestGrade); //Displays value of 15
+            
         }
     }
 }
