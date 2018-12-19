@@ -17,6 +17,7 @@ namespace Grades_NetFrame
         //Constructor for the class GradeBook to instantiate or initialize the object.
         public GradeBook()
         {
+            _name = "Empyty";
             grades = new List<float>(); //List that can hold 0 or more numbers
         }
 
@@ -45,7 +46,29 @@ namespace Grades_NetFrame
             grades.Add(grade);
         }
 
-        public string Name;
+        //This is now a property as we have the get and set functions. Use properties by default instead of fields.
+        public string Name
+        {
+            get //Allows code outside of this class to obtain the value in the variable.
+            {
+                return _name;
+            }
+            set //Allows code outside of this class to apply a value to the variable.
+            {
+                if (!String.IsNullOrEmpty(value)) //This will ensure that a NULL value can't be assigned to the _name.
+                {
+                    if(_name != value)
+                    {
+                        NameChanged(_name, value);
+                    }
+                    _name = value;
+                }
+            }
+        }
+
+        public NameChangedDelegate NameChanged;
+
+        private string _name;
 
         //If you don't specify the access modifier (public, private, etc) then it is a private member (as opposed to public).
         public List<float> grades;

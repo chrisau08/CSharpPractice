@@ -16,6 +16,12 @@ namespace Grades_NetFrame
             synth.Speak("Hello! This is the grade book program");
 
             GradeBook book = new GradeBook(); //Variable that can be used to access the class GradeBook (variable of type GradeBook.
+
+            book.NameChanged += new NameChangedDelegate(OnNameChanged); //Take whatever is in NameChanged and add this delegate to it.
+            book.NameChanged += new NameChangedDelegate(OnNameChanged2); //Take whatever is in NameChanged and add this delegate to it.
+
+            book.Name = "Chris' Grade Book";
+            book.Name = null; //Based on the code in the property Name this will be ignored.
             book.AddGrade(91);
             book.AddGrade(89.5f); //f tells the compiler that the value is a float and not double.
 
@@ -28,10 +34,30 @@ namespace Grades_NetFrame
             book3.AddGrade(15);
 
             GradeStatistics stats = book.ComputeStatistics(); //Runs ComputerStatistics and places the values at the memory locations for the fields in the object stats.
-            Console.WriteLine("Avg Grade: " + stats.AverageGrade); //Displays value of 65.16666
-            Console.WriteLine("Max Grade: " + stats.HighestGrade); //Displays value of 91
-            Console.WriteLine("Min Grade: " + stats.LowestGrade); //Displays value of 15
-            
+            WriteResult("Average", stats.AverageGrade);
+            WriteResult("Max Grade", (int)stats.HighestGrade); //Type coercion/conversion from float to int
+            WriteResult("Min Grade", (int)stats.LowestGrade); //Type coercion/conversion from float to int
+
+        }
+        
+        static void OnNameChanged(string existingName, string newName)
+        {
+            Console.WriteLine($"Grade book changing name from {existingName} to {newName}");
+        }
+
+        static void OnNameChanged2(string existingName, string newName)
+        {
+            Console.WriteLine("***");
+        }
+
+        static void WriteResult(string description, int result) //Must be static because the Main procedure is static and it will be calling this procedure.
+        {
+            Console.WriteLine($"{description}: {result}", description, result); //This method will place the values in their specified locations in the string.
+        }
+
+        static void WriteResult(string description, float result) //Must be static because the Main procedure is static and it will be calling this procedure.
+        {
+            Console.WriteLine("{0}: {1:F2}", description, result); //The 0 and 1 are placeholders for the elements in positions. Description would go to {0}; Result would go to {1}. Also displays the result as a float with 2 decimal places.
         }
     }
 }
