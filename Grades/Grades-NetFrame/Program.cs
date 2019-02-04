@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Speech.Synthesis;
+using System.IO;
 
 namespace Grades_NetFrame
 {
@@ -12,16 +13,31 @@ namespace Grades_NetFrame
         static void Main(string[] args)
         {
             
-            SpeechSynthesizer synth = new SpeechSynthesizer();
-            synth.Speak("Hello! This is the grade book program");
+            //SpeechSynthesizer synth = new SpeechSynthesizer();
+            //synth.Speak("Hello! This is the grade book program");
 
             GradeBook book = new GradeBook(); //Variable that can be used to access the class GradeBook (variable of type GradeBook.
 
             // Since the delegate is an event we no longer need the "new NameChangedEvent()" to add a subscriber.
             book.NameChanged += OnNameChanged; //Take whatever is in NameChanged and add this delegate to it.
 
-            book.Name = "Chris' Grade Book";
-            book.Name = null; //Based on the code in the property Name this will be ignored.
+            //book.Name = "Chris' Grade Book";
+            //book.Name = null; //Based on the code in the property Name this will be ignored.
+            Console.WriteLine("Please enter a name");
+
+            try
+            {
+                book.Name = Console.ReadLine();
+            }
+            catch(ArgumentException ex)
+            {
+                Console.WriteLine(ex.Message); //Outputs the exception message to the screen.
+            }
+            catch(NullReferenceException) //Catches a NULL exception.
+            {
+                Console.WriteLine("Something went wrong!");
+            }
+
             book.AddGrade(91);
             book.AddGrade(89.5f); //f tells the compiler that the value is a float and not double.
 
@@ -33,11 +49,17 @@ namespace Grades_NetFrame
             //Now any additions to book3 also impact book because they are referencing the same object at the specified memory location (Very Important).
             book3.AddGrade(15);
 
+            //Using ensures that the resources are cleaned up even if exception encountered.
+            using (StreamWriter outputFile = File.CreateText(@"C:\users\chris.kenny\desktop\grades.txt")) //Have to use the @ to escape the filepath.
+            {
+                book.WriteGrades(outputFile); //Provides the output stream as the input variable. In this instance it will cause the function to output to the screen.
+            }
+
             GradeStatistics stats = book.ComputeStatistics(); //Runs ComputerStatistics and places the values at the memory locations for the fields in the object stats.
             WriteResult("Average", stats.AverageGrade);
             WriteResult("Max Grade", (int)stats.HighestGrade); //Type coercion/conversion from float to int
             WriteResult("Min Grade", (int)stats.LowestGrade); //Type coercion/conversion from float to int
-            WriteResult("Grade", stats.LetterGrade);
+            WriteResult(stats.LetterGrade, stats.Description);
         }
         
         static void OnNameChanged(object sender, NameChangedEventArgs args)

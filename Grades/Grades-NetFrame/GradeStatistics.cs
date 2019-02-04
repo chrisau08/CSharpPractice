@@ -15,6 +15,33 @@ namespace Grades_NetFrame
             LowestGrade = float.MaxValue;
         }
 
+        public string Description
+        {
+            get
+            {
+                string result;
+                switch (LetterGrade)
+                {
+                    case "A":
+                        result = "Excellent";
+                        break;
+                    case "B":
+                        result = "Good";
+                        break;
+                    case "C":
+                        result = "Average";
+                        break;
+                    case "D":
+                        result = "Below Average";
+                        break;
+                    default:
+                        result = "Failing";
+                        break;
+                }
+                return result;
+            }
+        }
+
         public string LetterGrade
         {
             get

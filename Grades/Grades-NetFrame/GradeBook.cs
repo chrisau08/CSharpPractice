@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,6 +41,14 @@ namespace Grades_NetFrame
             return stats;
         }
 
+        public void WriteGrades(TextWriter destination)
+        {
+            for (int i = 0; i < grades.Count; i++)
+            {
+                destination.WriteLine(grades[i]);
+            }
+        }
+
         //This can actually be written as public void AddGrade(float grade) => grades.Add(grade);
         public void AddGrade(float grade)
         {
@@ -55,18 +64,22 @@ namespace Grades_NetFrame
             }
             set //Allows code outside of this class to apply a value to the variable.
             {
-                if (!String.IsNullOrEmpty(value)) //This will ensure that a NULL value can't be assigned to the _name.
+                //if (!String.IsNullOrEmpty(value)) //This will ensure that a NULL value can't be assigned to the _name.
+                //{
+                if (string.IsNullOrEmpty(value))
                 {
-                    if(_name != value)
-                    {
-                        NameChangedEventArgs args = new NameChangedEventArgs();
-                        args.ExistingName = _name;
-                        args.NewName = value;
-
-                        NameChanged(this, args); //this is variable that refers to itself
-                    }
-                    _name = value;
+                    throw new ArgumentException("Name cannot be null or empty");
                 }
+                if (_name != value && NameChanged != null) //Checks that the current name and value are not the same and that there is a subscriber to the NameChanged event.
+                {
+                    NameChangedEventArgs args = new NameChangedEventArgs();
+                    args.ExistingName = _name;
+                    args.NewName = value;
+
+                    NameChanged(this, args); //this is variable that refers to itself
+                }
+                _name = value;
+                //}
             }
         }
 
