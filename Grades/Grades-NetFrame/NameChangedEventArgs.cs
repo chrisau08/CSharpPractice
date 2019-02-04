@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Grades_NetFrame
 {
-    public delegate void NameChangedDelegate(object sender, NameChangedEventArgs args);
-    
+    public class NameChangedEventArgs
+    {
+        public string ExistingName { get; set; }
+        public string NewName { get; set; }
+    }
 }

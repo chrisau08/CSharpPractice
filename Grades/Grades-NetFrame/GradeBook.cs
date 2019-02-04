@@ -17,7 +17,7 @@ namespace Grades_NetFrame
         //Constructor for the class GradeBook to instantiate or initialize the object.
         public GradeBook()
         {
-            _name = "Empyty";
+            _name = "Empty";
             grades = new List<float>(); //List that can hold 0 or more numbers
         }
 
@@ -59,14 +59,18 @@ namespace Grades_NetFrame
                 {
                     if(_name != value)
                     {
-                        NameChanged(_name, value);
+                        NameChangedEventArgs args = new NameChangedEventArgs();
+                        args.ExistingName = _name;
+                        args.NewName = value;
+
+                        NameChanged(this, args); //this is variable that refers to itself
                     }
                     _name = value;
                 }
             }
         }
 
-        public NameChangedDelegate NameChanged;
+        public event NameChangedDelegate NameChanged;
 
         private string _name;
 

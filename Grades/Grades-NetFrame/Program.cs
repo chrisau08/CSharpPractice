@@ -17,8 +17,8 @@ namespace Grades_NetFrame
 
             GradeBook book = new GradeBook(); //Variable that can be used to access the class GradeBook (variable of type GradeBook.
 
-            book.NameChanged += new NameChangedDelegate(OnNameChanged); //Take whatever is in NameChanged and add this delegate to it.
-            book.NameChanged += new NameChangedDelegate(OnNameChanged2); //Take whatever is in NameChanged and add this delegate to it.
+            // Since the delegate is an event we no longer need the "new NameChangedEvent()" to add a subscriber.
+            book.NameChanged += OnNameChanged; //Take whatever is in NameChanged and add this delegate to it.
 
             book.Name = "Chris' Grade Book";
             book.Name = null; //Based on the code in the property Name this will be ignored.
@@ -40,14 +40,9 @@ namespace Grades_NetFrame
 
         }
         
-        static void OnNameChanged(string existingName, string newName)
+        static void OnNameChanged(object sender, NameChangedEventArgs args)
         {
-            Console.WriteLine($"Grade book changing name from {existingName} to {newName}");
-        }
-
-        static void OnNameChanged2(string existingName, string newName)
-        {
-            Console.WriteLine("***");
+            Console.WriteLine($"Grade book changing name from {args.ExistingName} to {args.NewName}");
         }
 
         static void WriteResult(string description, int result) //Must be static because the Main procedure is static and it will be calling this procedure.
