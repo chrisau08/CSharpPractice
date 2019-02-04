@@ -37,7 +37,7 @@ namespace Grades_NetFrame
             WriteResult("Average", stats.AverageGrade);
             WriteResult("Max Grade", (int)stats.HighestGrade); //Type coercion/conversion from float to int
             WriteResult("Min Grade", (int)stats.LowestGrade); //Type coercion/conversion from float to int
-
+            WriteResult("Grade", stats.LetterGrade);
         }
         
         static void OnNameChanged(object sender, NameChangedEventArgs args)
@@ -53,6 +53,11 @@ namespace Grades_NetFrame
         static void WriteResult(string description, float result) //Must be static because the Main procedure is static and it will be calling this procedure.
         {
             Console.WriteLine("{0}: {1:F2}", description, result); //The 0 and 1 are placeholders for the elements in positions. Description would go to {0}; Result would go to {1}. Also displays the result as a float with 2 decimal places.
+        }
+
+        static void WriteResult(string description, string result) //Must be static because the Main procedure is static and it will be calling this procedure.
+        {
+            Console.WriteLine("{0}: {1}", description, result); //The 0 and 1 are placeholders for the elements in positions. Description would go to {0}; Result would go to {1}. Also displays the result as a float with 2 decimal places.
         }
     }
 }
