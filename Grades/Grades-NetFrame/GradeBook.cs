@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace Grades_NetFrame
 {
     //Class GradeBook is being used as a blueprint for creating objects (or types). Consider this like an object in PL-SQL.
     //Additionally, a class is default to the internal keyword which means only available within the same assembly (project) unless explicitly marked as public.
-    public class GradeBook
+    public class GradeBook : GradeTracker
     {
         //static makes the object or function available without the code having to create a new instance of it.
         public static float MinimumGrade = 0; //So this can be called in something like console.writeline as GradeBook.MinimumGrade without needing "new MinimumGrade"
@@ -23,7 +24,9 @@ namespace Grades_NetFrame
         }
 
         //Contain all computations within the public function.
-        public GradeStatistics ComputeStatistics()
+        //Specifying virtual will have the compiler use whatever object is passed instead of using the function with the matching object type.
+        //Since Gradebook is inheriting from GradeTracker the override must be specified instead of virtual. Abstract is treated like virtual in the base class.
+        public override GradeStatistics ComputeStatistics()
         {
             GradeStatistics stats = new GradeStatistics();
 
@@ -41,7 +44,7 @@ namespace Grades_NetFrame
             return stats;
         }
 
-        public void WriteGrades(TextWriter destination)
+        public override void WriteGrades(TextWriter destination)
         {
             for (int i = 0; i < grades.Count; i++)
             {
@@ -50,44 +53,17 @@ namespace Grades_NetFrame
         }
 
         //This can actually be written as public void AddGrade(float grade) => grades.Add(grade);
-        public void AddGrade(float grade)
+        public override void AddGrade(float grade)
         {
             grades.Add(grade);
         }
 
-        //This is now a property as we have the get and set functions. Use properties by default instead of fields.
-        public string Name
+        public override IEnumerator GetEnumerator()
         {
-            get //Allows code outside of this class to obtain the value in the variable.
-            {
-                return _name;
-            }
-            set //Allows code outside of this class to apply a value to the variable.
-            {
-                //if (!String.IsNullOrEmpty(value)) //This will ensure that a NULL value can't be assigned to the _name.
-                //{
-                if (string.IsNullOrEmpty(value))
-                {
-                    throw new ArgumentException("Name cannot be null or empty");
-                }
-                if (_name != value && NameChanged != null) //Checks that the current name and value are not the same and that there is a subscriber to the NameChanged event.
-                {
-                    NameChangedEventArgs args = new NameChangedEventArgs();
-                    args.ExistingName = _name;
-                    args.NewName = value;
-
-                    NameChanged(this, args); //this is variable that refers to itself
-                }
-                _name = value;
-                //}
-            }
+            return grades.GetEnumerator();
         }
 
-        public event NameChangedDelegate NameChanged;
-
-        private string _name;
-
         //If you don't specify the access modifier (public, private, etc) then it is a private member (as opposed to public).
-        public List<float> grades;
+        protected List<float> grades; //protected can be accessed by the class or a class that has inherited from the class
     }
 }
